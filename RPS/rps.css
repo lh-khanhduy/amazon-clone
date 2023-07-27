@@ -1,0 +1,52 @@
+html {
+	background-color: #1e1e1e;
+	padding-left: 30px;
+}
+
+p {
+	color: white;
+	font-family: Arial, Helvetica, sans-serif;
+	font-size: 2.75rem;
+	font-weight: bold;
+}
+
+button {
+	font-size: 4rem;
+	background-color: #1e1e1e;
+	border: 4px solid white;
+	border-radius: 50%;
+	padding: 0.5em;
+	margin: 0 0.1em;
+	cursor: pointer;
+}
+
+.round-result {
+	font-size: 2.5rem;
+	height: 100px;
+}
+
+.result-inform {
+	font-size: 2rem;
+	font-weight: normal;
+}
+
+.reset-btn,
+.autoplay-btn {
+	border-radius: 0;
+	font-size: 2rem;
+	background-color: white;
+}
+
+.reset-confirmation-inform {
+	display: inline-block;
+	font-size: 18px;
+	font-weight: normal;
+}
+
+.reset-confirm-button {
+	background-color: white;
+	border-radius: 0;
+	border: none;
+	font-size: 20px;
+	padding: 0.3em 0.5em;
+}
