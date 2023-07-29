@@ -469,4 +469,26 @@ const products = [
 		priceCents: 2400,
 		keywords: ['sweaters', 'hoodies', 'apparel', 'mens'],
 	},
+	{
+		id: 'id1-backpack',
+		image: 'images/products/backpack.jpg',
+		name: 'Elite Backpack For Hiking',
+		rating: {
+			stars: 4,
+			count: 165,
+		},
+		priceCents: 4950,
+		keywords: ['backpack', 'hiking', 'bag', 'container'],
+	},
+	{
+		id: 'id2-umbrella',
+		image: 'images/products/umbrella.jpg',
+		name: 'Convenient Folding Umbrella',
+		rating: {
+			stars: 4.5,
+			count: 628,
+		},
+		priceCents: 1350,
+		keywords: ['umbrella', 'convenient', 'accessory', 'rain proof'],
+	},
 ];
