@@ -5,30 +5,6 @@ import { formatCurrency } from './utils/money.js';
 let productsHTML = '';
 let addedToCartTimeout;
 
-function informAddedToCart(productID) {
-	//add a class to the message element
-	document.querySelector(`.js-added-to-cart-${productID}`).classList.add('added-to-cart-pop-up');
-
-	//clear previous timeout
-	clearTimeout(addedToCartTimeout);
-	//set timeout for message
-	addedToCartTimeout = setTimeout(() => {
-		document
-			.querySelector(`.js-added-to-cart-${productID}`)
-			.classList.remove('added-to-cart-pop-up');
-	}, 2000);
-}
-
-function displayTotalCartQuantity() {
-	let totalQuantity = 0;
-
-	cart.forEach((item) => {
-		totalQuantity += item.quantity;
-	});
-
-	document.querySelector('.js-cart-quantity').innerHTML = totalQuantity;
-}
-
 //generate the products to the webpage
 products.forEach((product) => {
 	productsHTML += `
@@ -98,3 +74,27 @@ document.querySelectorAll('.js-add-to-cart').forEach((button) => {
 		console.log(cart);
 	});
 });
+
+function informAddedToCart(productID) {
+	//add a class to the message element
+	document.querySelector(`.js-added-to-cart-${productID}`).classList.add('added-to-cart-pop-up');
+
+	//clear previous timeout
+	clearTimeout(addedToCartTimeout);
+	//set timeout for message
+	addedToCartTimeout = setTimeout(() => {
+		document
+			.querySelector(`.js-added-to-cart-${productID}`)
+			.classList.remove('added-to-cart-pop-up');
+	}, 2000);
+}
+
+function displayTotalCartQuantity() {
+	let totalQuantity = 0;
+
+	cart.forEach((item) => {
+		totalQuantity += item.quantity;
+	});
+
+	document.querySelector('.js-cart-quantity').innerHTML = totalQuantity;
+}

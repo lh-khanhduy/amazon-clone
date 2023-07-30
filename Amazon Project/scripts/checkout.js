@@ -2,6 +2,7 @@ import { cart, removeProductFromCart } from '../data/cart.js';
 import { products } from '../data/products.js';
 import { formatCurrency } from './utils/money.js';
 
+//generate items in cart
 let cartSummaryHTML = '';
 
 cart.forEach((item) => {
@@ -97,11 +98,13 @@ cart.forEach((item) => {
 
 document.querySelector('.js-order-summary').innerHTML = cartSummaryHTML;
 
+//make delete link interactive
 document.querySelectorAll('.js-delete-link').forEach((link) => {
 	link.addEventListener('click', () => {
 		const productId = link.dataset.productId;
 		removeProductFromCart(productId);
 
 		document.querySelector(`.js-cart-item-container-${productId}`).remove();
+		console.log(cart);
 	});
 });
