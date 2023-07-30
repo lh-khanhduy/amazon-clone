@@ -1,9 +1,12 @@
-import { cart, addProductToCart } from '../data/cart.js';
+import { cart, addProductToCart, totalItems } from '../data/cart.js';
 import { products } from '../data/products.js';
 import { formatCurrency } from './utils/money.js';
 
 let productsHTML = '';
 let addedToCartTimeout;
+
+//generate total items in cart when first load the webpage
+document.querySelector('.js-cart-quantity').innerHTML = totalItems();
 
 //generate the products to the webpage
 products.forEach((product) => {
@@ -90,11 +93,5 @@ function informAddedToCart(productID) {
 }
 
 function displayTotalCartQuantity() {
-	let totalQuantity = 0;
-
-	cart.forEach((item) => {
-		totalQuantity += item.quantity;
-	});
-
-	document.querySelector('.js-cart-quantity').innerHTML = totalQuantity;
+	document.querySelector('.js-cart-quantity').innerHTML = totalItems();
 }

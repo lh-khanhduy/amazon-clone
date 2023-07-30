@@ -53,3 +53,11 @@ export function removeProductFromCart(deletingItemId) {
 	cart = newCart;
 	saveToStorage();
 }
+
+export function totalItems() {
+	let totalQuantity = 0;
+	cart.forEach((item) => {
+		totalQuantity += item.quantity;
+	});
+	return totalQuantity;
+}

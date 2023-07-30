@@ -1,6 +1,10 @@
-import { cart, removeProductFromCart } from '../data/cart.js';
+import { cart, removeProductFromCart, totalItems } from '../data/cart.js';
 import { products } from '../data/products.js';
 import { formatCurrency } from './utils/money.js';
+
+//generate total items in header
+
+document.querySelector('.js-total-items-in-cart').innerHTML = `${totalItems()} items`;
 
 //generate items in cart
 let cartSummaryHTML = '';
@@ -105,6 +109,7 @@ document.querySelectorAll('.js-delete-link').forEach((link) => {
 		removeProductFromCart(productId);
 
 		document.querySelector(`.js-cart-item-container-${productId}`).remove();
+		document.querySelector('.js-total-items-in-cart').innerHTML = `${totalItems()} items`;
 		console.log(cart);
 	});
 });
