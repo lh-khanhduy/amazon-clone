@@ -1,10 +1,14 @@
-import { cart, removeProductFromCart, totalItems } from '../data/cart.js';
+import {
+	cart,
+	updateItemQuantity,
+	removeProductFromCart,
+	totalItems,
+	getItemQuantityById,
+} from '../data/cart.js';
 import { products } from '../data/products.js';
 import { formatCurrency } from './utils/money.js';
 
-//generate total items in header
-
-document.querySelector('.js-total-items-in-cart').innerHTML = `${totalItems()} items`;
+updateItemsQuantityOnWebpage();
 
 //generate items in cart
 let cartSummaryHTML = '';
@@ -38,11 +42,21 @@ cart.forEach((item) => {
             </div>
             <div class="product-quantity">
                 <span>
-                Quantity: <span class="quantity-label">${item.quantity}</span>
+                Quantity: <span class="quantity-label js-quantity-label-${matchingProduct.id}">${
+		item.quantity
+	}</span>
                 </span>
-                <span class="update-quantity-link link-primary">
+                <span class="update-quantity-link link-primary js-update-link js-update-link-${
+					matchingProduct.id
+				}" data-product-id="${matchingProduct.id}">
                 Update
                 </span>
+                <input type="number" min="0" max="999" class="quantity-input js-quantity-input-${
+					matchingProduct.id
+				}">
+                <span class="link-primary save-quantity-link js-save-quantity-link-${
+					matchingProduct.id
+				}">Save</span>
                 <span class="delete-quantity-link link-primary js-delete-link" data-product-id="${
 					matchingProduct.id
 				}">
@@ -102,14 +116,73 @@ cart.forEach((item) => {
 
 document.querySelector('.js-order-summary').innerHTML = cartSummaryHTML;
 
+//make update link interactive
+document.querySelectorAll('.js-update-link').forEach((link) => {
+	link.addEventListener('click', () => {
+		const productId = link.dataset.productId;
+
+		//make update link and quantity label disappear
+		document.querySelector(`.js-update-link-${productId}`).innerHTML = '';
+		document.querySelector(`.js-quantity-label-${productId}`).innerHTML = '';
+
+		//make input quantity and save link appear
+		document
+			.querySelector(`.js-quantity-input-${productId}`)
+			.classList.add('is-editing-quantity');
+		document
+			.querySelector(`.js-save-quantity-link-${productId}`)
+			.classList.add('is-editing-quantity');
+
+		//make save link interactive
+		document
+			.querySelector(`.js-save-quantity-link-${productId}`)
+			.addEventListener('click', () => {
+				updateAfterSavingNewQuantity(productId);
+			});
+
+		//keydown support for save link
+		document
+			.querySelector(`.js-quantity-input-${productId}`)
+			.addEventListener('keydown', (event) => {
+				if (event.key === 'Enter') {
+					updateAfterSavingNewQuantity(productId);
+				}
+			});
+	});
+});
+
 //make delete link interactive
 document.querySelectorAll('.js-delete-link').forEach((link) => {
 	link.addEventListener('click', () => {
 		const productId = link.dataset.productId;
 		removeProductFromCart(productId);
 
+		//update webpage after delete
 		document.querySelector(`.js-cart-item-container-${productId}`).remove();
-		document.querySelector('.js-total-items-in-cart').innerHTML = `${totalItems()} items`;
-		console.log(cart);
+		updateItemsQuantityOnWebpage();
 	});
 });
+
+function updateItemsQuantityOnWebpage() {
+	document.querySelector('.js-total-items-in-cart').innerHTML = `${totalItems()} items`;
+}
+
+function updateAfterSavingNewQuantity(productId) {
+	//update new quantity for product
+	updateItemQuantity(
+		productId,
+		Number(document.querySelector(`.js-quantity-input-${productId}`).value)
+	);
+	updateItemsQuantityOnWebpage();
+	//after saving, return back to the beginning
+	document
+		.querySelector(`.js-quantity-input-${productId}`)
+		.classList.remove('is-editing-quantity');
+	document
+		.querySelector(`.js-save-quantity-link-${productId}`)
+		.classList.remove('is-editing-quantity');
+	document.querySelector(`.js-update-link-${productId}`).innerHTML = 'Update';
+	document.querySelector(`.js-quantity-label-${productId}`).innerHTML = `${getItemQuantityById(
+		productId
+	)}`;
+}
