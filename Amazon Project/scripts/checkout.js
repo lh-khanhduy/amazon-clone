@@ -75,7 +75,7 @@ cart.forEach((item) => {
 				}">
                 <div>
                 <div class="delivery-option-date">
-                    Tuesday, June 21
+                    Arrive in 10 days
                 </div>
                 <div class="delivery-option-price">
                     FREE Shipping
@@ -88,7 +88,7 @@ cart.forEach((item) => {
 				}">
                 <div>
                 <div class="delivery-option-date">
-                    Wednesday, June 15
+                    Arrive in 6 days
                 </div>
                 <div class="delivery-option-price">
                     $4.99 - Shipping
@@ -101,7 +101,7 @@ cart.forEach((item) => {
 				}">
                 <div>
                 <div class="delivery-option-date">
-                    Monday, June 13
+                    Arrive in 2 days
                 </div>
                 <div class="delivery-option-price">
                     $9.99 - Shipping
