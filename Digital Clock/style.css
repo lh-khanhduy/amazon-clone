@@ -15,9 +15,7 @@ body {
 	align-items: center;
 	background: linear-gradient(150deg, #00ffff, #ffff99, #ff66ff);
 	display: flex;
-	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
-	font-weight: bold;
-	font-display: swap;
+
 	height: inherit;
 	justify-content: center;
 }
@@ -40,6 +38,10 @@ body {
 	transition: transform 0.2s ease;
 }
 
+.container:hover {
+	transform: scale(1.1);
+}
+
 .screen {
 	backdrop-filter: blur(5px);
 	-webkit-backdrop-filter: blur(5px);
@@ -50,16 +52,23 @@ body {
 	display: flex;
 	flex-direction: row;
 	justify-content: space-around;
+	font-family: 'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;
+	font-weight: bold;
+	font-display: swap;
 	font-size: 120px;
 	height: 100%;
 	align-items: center;
-	padding: 0 20px;
+	padding: 0 20px 20px 20px;
 }
 
 .seconds {
 	color: rgb(255, 203, 45);
 }
 
-.container:hover {
-	transform: scale(1.1);
+.date {
+	font-size: 25px;
+	position: absolute;
+	bottom: 5px;
+	right: 10px;
+	font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif;
 }
