@@ -4,6 +4,7 @@ import {
 	removeProductFromCart,
 	totalItems,
 	getItemQuantityById,
+	updateDeliveryOption,
 } from '../data/cart.js';
 import { products } from '../data/products.js';
 import { formatCurrency } from './utils/money.js';
@@ -145,6 +146,12 @@ document.querySelectorAll('.js-delete-link').forEach((link) => {
 });
 
 //make delivery option interactive
+document.querySelectorAll('.js-delivery-option').forEach((element) => {
+	element.addEventListener('click', () => {
+		const { productId, deliveryOptionId } = element.dataset;
+		updateDeliveryOption(productId, deliveryOptionId);
+	});
+});
 
 function updateItemsQuantityOnWebpage() {
 	document.querySelector('.js-total-items-in-cart').innerHTML = `${totalItems()} items`;
@@ -183,11 +190,14 @@ function deliveryOptionHTML(matchingProduct, cartItem) {
 		const isChecked = option.id === cartItem.deliveryOptionId;
 
 		html += `
-			<div class="delivery-option">
+			<div class="delivery-option js-delivery-option"
+			data-product-id="${matchingProduct.id}"
+			data-delivery-option-id="${option.id}">
 					<input type="radio" 
 					${isChecked ? 'checked' : ''} 
 					class="delivery-option-input delivery-option-${matchingProduct.id}" 
 					name="delivery-option-${matchingProduct.id}">
+					
 					<div>
 						<div class="delivery-option-date">
 								${deliveryDate}
