@@ -15,7 +15,6 @@ body {
 	align-items: center;
 	background: linear-gradient(150deg, #00ffff, #ffff99, #ff66ff);
 	display: flex;
-
 	height: inherit;
 	justify-content: center;
 }
