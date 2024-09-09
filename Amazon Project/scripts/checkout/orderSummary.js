@@ -139,6 +139,8 @@ export function renderOrders() {
 			//update webpage after delete
 			document.querySelector(`.js-cart-item-container-${productId}`).remove();
 			document.querySelector('.js-total-items-in-cart').innerHTML = `${totalItems()} items`;
+
+			renderPayment();
 		});
 	});
 
