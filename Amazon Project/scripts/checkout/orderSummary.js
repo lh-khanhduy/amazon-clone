@@ -8,13 +8,14 @@ import {
 } from '../../data/cart.js';
 import { products } from '../../data/products.js';
 import { formatCurrency } from '../utils/money.js';
-import { deliveryOptions } from '../../data/deliveryOption.js';
+import { deliveryOptions, getDeliveryOption } from '../../data/deliveryOption.js';
 
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
+import { renderPayment } from './payment.js';
 
 document.querySelector('.js-total-items-in-cart').innerHTML = `${totalItems()} items`;
 
-export function renderCheckoutPage() {
+export function renderOrders() {
 	//generate items in cart
 	let cartSummaryHTML = '';
 
@@ -29,14 +30,7 @@ export function renderCheckoutPage() {
 		});
 
 		const deliveryOptionsId = item.deliveryOptionId;
-
-		let deliveryOption;
-
-		deliveryOptions.forEach((option) => {
-			if (option.id === deliveryOptionsId) {
-				deliveryOption = option;
-			}
-		});
+		const deliveryOption = getDeliveryOption(deliveryOptionsId);
 
 		const today = dayjs();
 		const deliveryDate = today.add(deliveryOption.deliveryDays, 'days');
@@ -121,6 +115,7 @@ export function renderCheckoutPage() {
 				.querySelector(`.js-save-quantity-link-${productId}`)
 				.addEventListener('click', () => {
 					updateAfterSavingNewQuantity(productId);
+					renderPayment();
 				});
 
 			//keydown support for save link
@@ -129,6 +124,7 @@ export function renderCheckoutPage() {
 				.addEventListener('keydown', (event) => {
 					if (event.key === 'Enter') {
 						updateAfterSavingNewQuantity(productId);
+						renderPayment();
 					}
 				});
 		});
@@ -151,7 +147,8 @@ export function renderCheckoutPage() {
 		element.addEventListener('click', () => {
 			const { productId, deliveryOptionId } = element.dataset;
 			updateDeliveryOption(productId, deliveryOptionId);
-			renderCheckoutPage();
+			renderOrders();
+			renderPayment();
 		});
 	});
 }
