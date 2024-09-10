@@ -1,4 +1,4 @@
-import { cart } from '../../data/cart.js';
+import { cart, totalItems } from '../../data/cart.js';
 import { products } from '../../data/products.js';
 import { formatCurrency } from '../utils/money.js';
 import { deliveryOptions } from '../../data/deliveryOption.js';
@@ -30,7 +30,10 @@ export function renderPayment() {
 	totalBeforeTax = priceItems + shippingCost;
 
 	//display prices
-	document.querySelector('.js-total-items-money').innerHTML = `$${formatCurrency(priceItems)}`;
+	document.querySelector('.js-total-items-quantity').innerHTML = `Items (${totalItems()}):`;
+
+	document.querySelector('.js-total-items-price').innerHTML = `$${formatCurrency(priceItems)}`;
+
 	document.querySelector('.js-total-shipping-cost').innerHTML = `$${formatCurrency(
 		shippingCost
 	)}`;

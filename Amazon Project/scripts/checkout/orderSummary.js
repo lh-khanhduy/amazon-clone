@@ -8,7 +8,11 @@ import {
 } from '../../data/cart.js';
 import { products } from '../../data/products.js';
 import { formatCurrency } from '../utils/money.js';
-import { deliveryOptions, getDeliveryOption } from '../../data/deliveryOption.js';
+import {
+	deliveryOptions,
+	getDeliveryOption,
+	calculateDeliveryDate,
+} from '../../data/deliveryOption.js';
 
 import dayjs from 'https://unpkg.com/dayjs@1.11.10/esm/index.js';
 import { renderPayment } from './payment.js';
@@ -32,8 +36,7 @@ export function renderOrders() {
 		const deliveryOptionsId = item.deliveryOptionId;
 		const deliveryOption = getDeliveryOption(deliveryOptionsId);
 
-		const today = dayjs();
-		const deliveryDate = today.add(deliveryOption.deliveryDays, 'days');
+		const deliveryDate = calculateDeliveryDate(deliveryOption);
 		const dateString = deliveryDate.format('dddd, MMMM D');
 
 		cartSummaryHTML += `
