@@ -39,7 +39,7 @@ export function renderPayment() {
 	)}`;
 	document.querySelector('.js-total-before-tax').innerHTML = `$${formatCurrency(totalBeforeTax)}`;
 	document.querySelector('.js-estimated-tax').innerHTML = `$${formatCurrency(
-		totalBeforeTax / 10
+		totalBeforeTax * 0.1
 	)}`;
 	document.querySelector('.js-total-money').innerHTML = `$${formatCurrency(
 		totalBeforeTax * 1.1
