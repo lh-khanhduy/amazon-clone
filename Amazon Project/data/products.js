@@ -1,3 +1,30 @@
+import { formatCurrency } from '../scripts/utils/money.js';
+
+class Product {
+	id;
+	image;
+	name;
+	rating;
+	priceCents;
+
+	constructor(productDetails) {
+		this.id = productDetails.id;
+		this.image = productDetails.image;
+		this.name = productDetails.name;
+		this.rating = productDetails.rating;
+		this.priceCents = productDetails.priceCents;
+	}
+
+	getStarURL() {
+		return `images/ratings/rating-${this.rating.stars * 10}.png`;
+	}
+
+	getPrice() {
+		return `$${formatCurrency(this.priceCents)}`;
+	}
+}
+
+// all products are converted to classes
 export const products = [
 	{
 		id: 'e43638ce-6aa0-4b85-b27f-e1d07eb678c6',
@@ -491,4 +518,6 @@ export const products = [
 		priceCents: 1350,
 		keywords: ['umbrella', 'convenient', 'accessory', 'rain proof'],
 	},
-];
+].map((productDetails) => {
+	return new Product(productDetails);
+});
