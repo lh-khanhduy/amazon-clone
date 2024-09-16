@@ -13,3 +13,7 @@ if (formatCurrency(2000.5) === '20.01') {
 } else console.log('failed');
 
 // this is new line to testing using git
+
+if (3 > 5) {
+	console / log('....');
+}
