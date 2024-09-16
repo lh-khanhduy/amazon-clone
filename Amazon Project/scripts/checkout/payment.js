@@ -2,6 +2,7 @@ import { cart, totalItems } from '../../data/cart.js';
 import { products } from '../../data/products.js';
 import { formatCurrency } from '../utils/money.js';
 import { deliveryOptions } from '../../data/deliveryOption.js';
+import { addOrder } from '../../data/order.js';
 
 export function renderPayment() {
 	//calculating money
@@ -44,4 +45,26 @@ export function renderPayment() {
 	document.querySelector('.js-total-money').innerHTML = `$${formatCurrency(
 		totalBeforeTax * 1.1
 	)}`;
+
+	//make place order button interactive
+	document.querySelector('.js-place-order-button').addEventListener('click', async () => {
+		try {
+			const response = await fetch('https://supersimplebackend.dev/orders', {
+				method: 'POST',
+				headers: {
+					'Content-Type': 'application/json',
+				},
+				body: JSON.stringify({
+					cart: cart,
+				}),
+			});
+
+			const order = await response.json();
+			addOrder(order);
+		} catch (e) {
+			console.log('error happen, booooo');
+		}
+
+		window.location.href = 'orders.html';
+	});
 }
